@@ -5,22 +5,14 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
-	"text/template"
 	"time"
 
 	"github.com/Yandex-Practicum/go1fl-sprint6-final/internal/service"
 )
 
 func IndexHandler(w http.ResponseWriter, r *http.Request) {
-	tmpl, err := template.ParseFiles("internal/handlers/index.html")
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-	if err := tmpl.Execute(w, nil); err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
+
+	http.ServeFile(w, r, "index.html")
 }
 
 func UploadHandler(w http.ResponseWriter, r *http.Request) {
